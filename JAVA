@@ -1,0 +1,44 @@
+const quizData = [
+  {
+    question: "What is 2 + 2?",
+    answers: ["1", "2", "4", "5"],
+    correct: 2
+  },
+  {
+    question: "What is the capital of Malaysia?",
+    answers: ["KL", "Penang", "Johor", "Sabah"],
+    correct: 0
+  }
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion() {
+  document.getElementById("question").innerText = quizData[current].question;
+
+  let buttons = document.querySelectorAll(".btn");
+  buttons.forEach((btn, i) => {
+    btn.innerText = quizData[current].answers[i];
+  });
+}
+
+function selectAnswer(index) {
+  if (index === quizData[current].correct) {
+    score++;
+  }
+}
+
+function nextQuestion() {
+  current++;
+
+  if (current < quizData.length) {
+    loadQuestion();
+  } else {
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("score").innerText =
+      "Your score: " + score + "/" + quizData.length;
+  }
+}
+
+loadQuestion();
